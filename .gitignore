@@ -1,0 +1,25 @@
+# Estado local de Obsidian: cambia al abrir notas o mover paneles.
+/.obsidian/workspace*.json
+/.obsidian/cache/
+/.obsidian/plugins/obsidian-git/data.json
+/.obsidian-git-data
+/.trash/
+
+# Sincronizadores y archivos del sistema.
+/.stfolder/
+/.stversions/
+/.stignore
+.DS_Store
+Thumbs.db
+desktop.ini
+~$*
+*.tmp
+*.swp
+
+# Credenciales y configuración local de herramientas.
+.env
+.env.*
+!.env.example
+/.aws/
+/.codex/
+/.agents/
