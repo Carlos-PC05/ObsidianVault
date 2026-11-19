@@ -1,5 +1,6 @@
 {
   "cssTheme": "Animal Island Cozy",
   "nativeMenus": false,
-  "accentColor": "#cef024"
+  "accentColor": "#cef024",
+  "showRibbon": true
 }

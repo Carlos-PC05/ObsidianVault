@@ -1,0 +1,221 @@
+.study-pdf-default-star svg {
+	fill: currentColor;
+}
+
+/* Obsidian already ships a solid, fully-opaque selection color for exactly
+   this case -- app.css has `.pdf-container .textLayer ::selection { background-
+   color: var(--color-accent); }`, and --color-accent is a plain opaque hsl(),
+   not a transparent mix. A translucent color-mix() override (tried first)
+   was actually a step down from that. Re-applied here without requiring the
+   .pdf-container ancestor, in case the mobile viewer nests the text layer
+   differently (that would silently fall back to pdf.js's own much fainter
+   default, rgba(0, 0, 255, 0.25), confirmed present in app.css too).
+   The tripled class beats app.css's two-class selector on specificity alone
+   (0,3,1) > (0,2,1) -- needed because pdf.js injects its own textLayer
+   stylesheet lazily when a PDF view first mounts, sometimes after this one,
+   so cascade order can't be relied on to win the tie. */
+.textLayer.textLayer.textLayer ::selection {
+	background-color: var(--color-accent);
+}
+
+/* Mobile selection overlay (see src/ui/selection-overlay.ts). iOS honours no
+   ::selection property at all inside the PDF text layer -- confirmed on-device
+   with an opaque red background AND yellow glyphs at the highest specificity in
+   the cascade, neither of which rendered -- so the only way to show the user
+   what they've selected is to paint it ourselves, the way CodeMirror does for
+   the editor. multiply keeps the canvas text underneath readable instead of
+   burying it under an opaque block. */
+.study-pdf-selection-overlay {
+	position: fixed;
+	inset: 0;
+	/* Above the PDF canvas, below our own popup (--layer-menu) so the color
+	   dots are never tinted by it. */
+	z-index: calc(var(--layer-menu) - 1);
+	pointer-events: none;
+}
+
+.study-pdf-selection-rect {
+	position: fixed;
+	background-color: var(--color-accent);
+	/* Plain opacity rather than mix-blend-mode: the container above sets a
+	   z-index and so forms a stacking context, which would leave a blend mode
+	   compositing against the container instead of the page underneath. */
+	opacity: 0.4;
+	border-radius: 1px;
+}
+
+/* Compact icon popup shown over the PDF (color dots to highlight, trash to
+   remove). Theme variables only -- no hardcoded colors -- so it stays readable
+   in any light/dark theme, exactly like Obsidian's own menus. */
+.study-pdf-popup {
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-2-1);
+	padding: var(--size-2-1);
+	background-color: var(--background-primary);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-m);
+	box-shadow: var(--shadow-s);
+	z-index: var(--layer-menu);
+}
+
+.study-pdf-popup-row {
+	display: flex;
+	align-items: center;
+	gap: var(--size-2-1);
+}
+
+.study-pdf-popup-note {
+	max-width: 260px;
+	padding: var(--size-2-1) var(--size-2-2);
+	font-size: var(--font-ui-small);
+	color: var(--text-normal);
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+.study-pdf-note-input {
+	width: 240px;
+	min-height: 60px;
+	resize: vertical;
+	font-size: var(--font-ui-small);
+}
+
+/* Snapshot overlay that hides the blank flash while Obsidian fully reloads the
+   PDF view after we write the file. Holds pixel-identical copies of the visible
+   page canvases; pointer-events pass through, and it fades out once the
+   reloaded pages have rendered. */
+.study-pdf-curtain {
+	position: fixed;
+	inset: 0;
+	z-index: var(--layer-popover);
+	pointer-events: none;
+}
+
+.study-pdf-curtain canvas {
+	position: fixed;
+}
+
+.study-pdf-curtain.is-fading,
+.study-pdf-curtain canvas.is-fading {
+	opacity: 0;
+	transition: opacity 120ms ease-out;
+}
+
+.study-pdf-color-dot {
+	display: block;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	border: 1px solid var(--background-modifier-border-hover);
+}
+
+/* "Show all highlights and notes" modal */
+.study-pdf-list {
+	max-height: 60vh;
+	overflow-y: auto;
+}
+
+.study-pdf-list-row {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--size-4-2);
+	padding: var(--size-4-2);
+	border-radius: var(--radius-s);
+	cursor: pointer;
+}
+
+.study-pdf-list-row:hover {
+	background-color: var(--background-modifier-hover);
+}
+
+.study-pdf-list-row .study-pdf-color-dot {
+	flex-shrink: 0;
+	margin-top: 3px;
+}
+
+.study-pdf-list-body {
+	flex: 1;
+	min-width: 0;
+}
+
+.study-pdf-list-quote {
+	overflow-wrap: break-word;
+}
+
+.study-pdf-list-note {
+	margin-top: var(--size-2-1);
+	padding-left: var(--size-4-2);
+	border-left: 2px solid var(--interactive-accent);
+	color: var(--text-muted);
+	font-size: var(--font-ui-small);
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+.study-pdf-list-page {
+	flex-shrink: 0;
+	color: var(--text-faint);
+	font-size: var(--font-ui-small);
+}
+
+.study-pdf-list-toolbar {
+	display: flex;
+	justify-content: flex-end;
+	gap: var(--size-4-2);
+	padding-bottom: var(--size-4-2);
+}
+
+.study-pdf-list-quote,
+.study-pdf-list-note {
+	user-select: text;
+}
+
+.study-pdf-list-copy {
+	flex-shrink: 0;
+}
+
+/* Touch sizing. The popup's controls are ~14px dots inside mouse-sized padding,
+   which is well under a comfortable thumb target, and every one of them commits
+   a write to the .pdf behind the reload curtain -- a mis-tap costs a full
+   write + reload + undo. Grow the hit areas and the gaps between them under
+   coarse pointers only, so desktop rendering is untouched. Placed last so it
+   wins on cascade order without specificity tricks. */
+@media (pointer: coarse) {
+	.study-pdf-popup {
+		gap: var(--size-2-2);
+		padding: var(--size-2-2);
+	}
+
+	.study-pdf-popup-row {
+		gap: var(--size-2-2);
+		/* Six 44px targets plus gaps overflow a narrow split pane; reflow
+		   instead. positionPopup measures after attach, so a two-row popup is
+		   still clamped correctly. */
+		flex-wrap: wrap;
+		max-width: 90vw;
+	}
+
+	.study-pdf-popup .clickable-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 44px;
+		min-height: 44px;
+	}
+
+	.study-pdf-color-dot {
+		width: 20px;
+		height: 20px;
+	}
+
+	.study-pdf-note-input {
+		width: min(240px, 70vw);
+		min-height: 80px;
+	}
+
+	.study-pdf-list-row {
+		padding: var(--size-4-3);
+	}
+}
