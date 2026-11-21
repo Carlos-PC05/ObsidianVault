@@ -15,7 +15,7 @@
 
 ## 1. Resumen ejecutivo
 
-GUARD intenta identificar instrucciones adversarias ocultas en un currículo **antes** de que un sistema de contratación con LLM lo lea. No comprueba si el candidato cumple requisitos; compara segmentos del documento con una **biblioteca de ataques conocidos** usando *embeddings* semánticos y similitud coseno.
+GUARD intenta identificar instrucciones adversarias ocultas en un CV **antes** de que un sistema de contratación con LLM lo lea. No comprueba si el candidato cumple requisitos; compara segmentos del documento con una **biblioteca de ataques conocidos** usando *embeddings* semánticos y similitud coseno.
 
 Su aportación más valiosa no es una detección perfecta —no la consigue—, sino un protocolo explícito para **evitar que paráfrasis casi idénticas aparezcan a la vez en la biblioteca conocida y en los ataques de evaluación**. Esto resulta muy útil para tu TFG, porque un detector puede parecer excelente si se prueba únicamente con variantes de ataques que ya conoce.
 
@@ -59,7 +59,7 @@ Embeddings de ataques              Embeddings de chunks
 La puntuación consiste en tomar el **máximo** de las similitudes entre todos los fragmentos del CV y todos los ataques de referencia:
 
 \[
-s(d)=\max_{c\in C(d),\ a\in A_{ref}}\cos(e(c),e(a))
+	s(d) = \max_{c\in C(d),\ a\in A_{ref}}\cos(e(c),e(a))
 \]
 
 Donde `e(x)` es el embedding de un texto, `C(d)` son sus fragmentos y `A_ref` la biblioteca de patrones adversarios. Si `s(d) ≥ τ`, el documento se marca.
@@ -204,6 +204,6 @@ Tool response: read_logs / read_documentation
 
 ## Conclusión para tu TFG
 
-**GUARD es muy aprovechable por su protocolo experimental y el uso de embeddings.** Enseña que un detector **entrenamiento-libre** puede aportar una señal útil y explicable, pero sus errores obligan a combinarlo con políticas de autorización. Para Agent Security Lab es especialmente valioso **copiar la disciplina de evaluación**, no asumir que sus métricas se trasladan desde CV a logs DevOps.
+**GUARD es muy aprovechable por su protocolo experimental y el uso de embeddings.** Enseña que un detector **entrenamiento-libre** puede aportar una señal útil y explicable, pero sus errores obligan a combinarlo con políticas de autorización. Para CarpacAI es especialmente valioso **copiar la disciplina de evaluación**, no asumir que sus métricas se trasladan desde CV a logs DevOps.
 
 **Ubicación rápida:** figura 1 y construcción de datos (p. 4); fórmula y segmentación (p. 5); tablas 4–7 (p. 6); matriz de confusión, tabla 8 (p. 7); comparación y validación externa, tablas 9–10 (p. 8); discusión ética, límites y trabajo futuro (pp. 8–9).

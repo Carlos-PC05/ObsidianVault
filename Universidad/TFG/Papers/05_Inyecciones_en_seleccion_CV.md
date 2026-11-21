@@ -1,6 +1,6 @@
 # 05. Prompt injection en la evaluación automática de currículos
 
-> **Lectura crítica para el TFG — Agent Security Lab.** Resumen en español del artículo, con separación entre lo que revisan los autores y las propuestas de aplicación al proyecto. **Es una revisión narrativa principalmente conceptual**: no debe citarse como si demostrara mediante un experimento amplio la eficacia de una defensa.
+> **Lectura crítica para el TFG — CarpacAI.** Resumen en español del artículo, con separación entre lo que revisan los autores y las propuestas de aplicación al proyecto. **Es una revisión narrativa principalmente conceptual**: no debe citarse como si demostrara mediante un experimento amplio la eficacia de una defensa.
 
 ## Ficha bibliográfica
 

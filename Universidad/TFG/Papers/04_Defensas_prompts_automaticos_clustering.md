@@ -1,6 +1,6 @@
 # 04. Defensa con prompts de sistema optimizados automáticamente
 
-> **Lectura crítica para el TFG — Agent Security Lab.** Resumen en español de un estudio defensivo experimental. La sección «Aplicación al TFG» es una propuesta propia. **Precaución:** el trabajo evalúa principalmente *jailbreaks* mediante prompts dañinos directos; no constituye por sí solo una validación sobre inyección indirecta en resultados de herramientas.
+> **Lectura crítica para el TFG — CarpacAI.** Resumen en español de un estudio defensivo experimental. La sección «Aplicación al TFG» es una propuesta propia. **Precaución:** el trabajo evalúa principalmente *jailbreaks* mediante prompts dañinos directos; no constituye por sí solo una validación sobre inyección indirecta en resultados de herramientas.
 
 ## Ficha bibliográfica
 
@@ -140,7 +140,7 @@ En entrenamiento, algunos clusters mejoran de forma acusada —especialmente uno
 - No se cuantifica de forma completa cómo cambian la **utilidad en tareas legítimas**, la latencia o el coste de inferencia en un agente de herramientas.
 - Elegir K = 6 es una decisión del experimento, no un número óptimo universal; los autores dejan su sensibilidad para trabajo futuro.
 
-## 7. Cómo aprovecharlo en Agent Security Lab (propuesta propia)
+## 7. Cómo aprovecharlo en CarpacAI (propuesta propia)
 
 ### Defensa sencilla para el MVP
 

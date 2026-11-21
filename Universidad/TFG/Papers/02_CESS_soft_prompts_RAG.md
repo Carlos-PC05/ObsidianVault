@@ -1,6 +1,6 @@
 # 02. CESS: selección de evidencias y *soft prompts* en sistemas RAG
 
-> **Lectura crítica para el TFG — Agent Security Lab.** Síntesis del artículo en español, con valoraciones propias marcadas como tales. **Aviso terminológico:** en este paper, *soft prompt injection* significa introducir representaciones continuas de conocimiento para mejorar las respuestas. **No significa un ataque de prompt injection.**
+> **Lectura crítica para el TFG — CarpacAI.** Síntesis del artículo en español, con valoraciones propias marcadas como tales. **Aviso terminológico:** en este paper, *soft prompt injection* significa introducir representaciones continuas de conocimiento para mejorar las respuestas. **No significa un ataque de prompt injection.**
 
 ## Ficha bibliográfica
 
@@ -156,7 +156,7 @@ También informan de triples correctos y completos en un **76 %** de una muestra
 
 El artículo **no prueba que el grafo, la selección por entropía o los soft prompts filtren instrucciones adversarias**. De hecho, seleccionar lo «más influyente» podría conservar material manipulado si un atacante controla los documentos. Esta es una **hipótesis para investigar**, no un resultado demostrado por CESS.
 
-## 6. Aplicación a Agent Security Lab (propuestas propias)
+## 6. Aplicación a CarpacAI (propuestas propias)
 
 **No lo incorporaría al MVP como mecanismo de defensa.** Su complejidad y finalidad se apartan del objetivo central: medir las acciones no autorizadas de agentes con herramientas.
 

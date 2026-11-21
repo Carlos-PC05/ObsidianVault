@@ -1,6 +1,6 @@
 # 01. SAPIA: ataques de *prompt injection* adaptados al escenario
 
-> **Lectura crítica para el TFG — Agent Security Lab.** Resumen analítico en español, no traducción íntegra. Los apartados «Aplicación al TFG» y «Valoración crítica» contienen propuestas y análisis propios, diferenciados de las afirmaciones del artículo.
+> **Lectura crítica para el TFG — CarpacAI.** Resumen analítico en español, no traducción íntegra. Los apartados «Aplicación al TFG» y «Valoración crítica» contienen propuestas y análisis propios, diferenciados de las afirmaciones del artículo.
 
 ## Ficha bibliográfica
 
@@ -131,7 +131,7 @@ Otras reservas:
 - No constituye una evaluación directa de **inyección indirecta a través de documentos, logs o resultados de herramientas**.
 - Las afirmaciones causales sobre por qué se transfiere el ataque entre versiones son interpretaciones de los autores, no una verificación concluyente de todos los mecanismos internos.
 
-## 6. ¿Qué puedes aprovechar en Agent Security Lab?
+## 6. ¿Qué puedes aprovechar en CarpacAI?
 
 **Propuestas de aplicación — no resultados del artículo:**
 
