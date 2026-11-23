@@ -1,4 +1,4 @@
-# 02. CESS: selección de evidencias y *soft prompts* en sistemas RAG
+	# 02. CESS: selección de evidencias y *soft prompts* en sistemas RAG
 
 > **Lectura crítica para el TFG — CarpacAI.** Síntesis del artículo en español, con valoraciones propias marcadas como tales. **Aviso terminológico:** en este paper, *soft prompt injection* significa introducir representaciones continuas de conocimiento para mejorar las respuestas. **No significa un ataque de prompt injection.**
 
